@@ -3,14 +3,14 @@ import SearchForm from './searchForm'
 import './App.css'
 
 class App extends Component {
-  
-  /*
-  componentDidMount() {
-    const q = 'daniel keyes'; //Search for volumes that contain this text string
-    const printType = 'books'; //'all', 'books', or 'magazines'
-    const key = 'AIzaSyBbwfVgB3Tm0styebgMNI-I_Zw7WjRqDUo'; // API key
-    const url = `https://www.googleapis.com/books/v1/volumes?q=${q}&printType=${printType}&key=${key}`; 
 
+  componentDidMount() {
+    const search = 'daniel keyes'; //Search for volumes that contain this text string
+    const printType = 'books'; //'all', 'books', or 'magazines'
+    const bookType = 'full'; // partial, full, free-ebooks, paid-ebooks, ebooks
+    const key = 'AIzaSyBbwfVgB3Tm0styebgMNI-I_Zw7WjRqDUo'; // API key
+    const url = `https://www.googleapis.com/books/v1/volumes?q=${search}&printType=${printType}&filter=${bookType}&key=${key}`;
+  
     fetch(url)
       .then(res => {
         if(!res.ok) {
@@ -23,9 +23,7 @@ class App extends Component {
       .catch(err => {
         console.log(err.message)
       });
-    
   }
-  */
 
   render() {
     return (
@@ -33,7 +31,9 @@ class App extends Component {
         <header>
           <h1>Google Book Search</h1>
         </header>
-        <SearchForm />
+        <SearchForm
+          
+        />
         <main>
           
         </main>
