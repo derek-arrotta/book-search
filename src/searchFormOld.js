@@ -5,6 +5,7 @@ class SearchForm extends Component {
 
   render() {
     return (
+      
       <form>
         <div className="search">
           <label>Search: </label>

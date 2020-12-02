@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Form from './Form';
 import "./App.css";
 
 class App extends Component {
@@ -11,7 +12,7 @@ class App extends Component {
       printType: 'all',
       bookType: 'no filter',
     };
-    // bind update functions to states
+    // bind update functions to states?
     this.searchChange = this.searchChange.bind(this);
     this.printTypeChange = this.printTypeChange.bind(this);
     this.bookTypeChange = this.bookTypeChange.bind(this);
@@ -59,42 +60,61 @@ class App extends Component {
   // render of input forms
   render() {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label id="searchInput">
-          Name:
-          <input
-            type="text"
-            value={this.state.searchInput}
-            onChange={e => this.searchChange(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Submit" />
-        <label>Print Type: 
-          <select
-            id="printType"
-            value={this.state.printType}
-            onChange={e => this.printTypeChange(e.target.value)}
-          >
-            <option value="all">all</option>
-            <option value="books">books</option>
-            <option value="magazines">magazines</option>
-          </select>
-        </label>
-        <label>Book Type: 
-          <select
-            id="bookType"
-            value={this.state.bookType}
-            onChange={e => this.bookTypeChange(e.target.value)}
-          >
-            <option value="no filter">no filter</option>
-            <option value="partial">parts of text are viewable</option>
-            <option value="full">all of text is viewable</option>
-            <option value="free-ebooks">free ebooks</option>
-            <option value="paid-ebooks">paid ebooks</option>
-            <option value="ebooks">paid or free ebooks</option>
-          </select>
-        </label>
-      </form>
+      <div className="App">
+        <header>
+          <h1>Google Book Search</h1>
+        </header>
+
+        <Form 
+          searchChange={searchInput => this.searchChange(searchInput)}
+          printTypeChange={printType => this.printTypeChange(printType)}
+          bookTypeChange={bookType => this.bookTypeChange(bookType)}
+          handleSubmit={event => this.handleSubmit(event)}
+        />
+
+
+
+
+        {/*
+        <form onSubmit={this.handleSubmit}>
+          <label id="searchInput">
+            Name:
+            <input
+              type="text"
+              value={this.state.searchInput}
+              onChange={e => this.searchChange(e.target.value)}
+            />
+          </label>
+          <input type="submit" value="Submit" />
+          <label>Print Type: 
+            <select
+              id="printType"
+              value={this.state.printType}
+              onChange={e => this.printTypeChange(e.target.value)}
+            >
+              <option value="all">all</option>
+              <option value="books">books</option>
+              <option value="magazines">magazines</option>
+            </select>
+          </label>
+          <label>Book Type: 
+            <select
+              id="bookType"
+              value={this.state.bookType}
+              onChange={e => this.bookTypeChange(e.target.value)}
+            >
+              <option value="no filter">no filter</option>
+              <option value="partial">parts of text are viewable</option>
+              <option value="full">all of text is viewable</option>
+              <option value="free-ebooks">free ebooks</option>
+              <option value="paid-ebooks">paid ebooks</option>
+              <option value="ebooks">paid or free ebooks</option>
+            </select>
+          </label>
+        </form>
+        */}
+
+      </div>
     );
   }
 }
