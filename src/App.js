@@ -11,7 +11,7 @@ class App extends Component {
       searchInput: '',
       printType: 'all',
       bookType: 'no filter',
-      listItems: [],
+      books: [],
     };
     // bind update functions to states?
     this.searchChange = this.searchChange.bind(this);
@@ -30,25 +30,26 @@ class App extends Component {
     if (this.state.bookType === "no filter") {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&key=${APIkey}`)
         .then(res => res.json())
-        .then(listItems => {
-          console.log(listItems);
-          this.updateDataState(listItems);
+        .then(response => {
+          console.log(response);
+          this.updateDataState(response.items);
         });
     }
     else {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&filter=${this.state.bookType}&key=${APIkey}`)
         .then(res => res.json())
-        .then(listItems => {
-          console.log(listItems);
-          this.updateDataState(listItems);
+        .then(response => {
+          console.log(response);
+          this.updateDataState(response.items);
         });
     }
   }
 
-  updateDataState(listItems) {
+  // update state with new response data when after submit is pressed
+  updateDataState(responseItems) {
    console.log('display data was called');
-   this.setState({listItems});
-    console.log(this.state.listItems);
+   this.setState({books: responseItems});
+   console.log(this.state.books);
   }
 
   // if search input, print type, or book type is changed, update the state
@@ -75,10 +76,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
+        {/* HEADER */}
         <header>
           <h1>Google Book Search</h1>
         </header>
 
+        {/* FORM */}
         <Form 
           searchChange={searchInput => this.searchChange(searchInput)}
           printTypeChange={printType => this.printTypeChange(printType)}
@@ -86,15 +89,32 @@ class App extends Component {
           handleSubmit={event => this.handleSubmit(event)}
         />
 
+        {/* LIST OF BOOKS */}
         <ul >
-          {this.state.listItems.map(data => (
-            <li>
-              {data.items.volumeInfo.title}
+          {this.state.books.map((book, index) => (
+            <li key={index}>
+              <img src={book.volumeInfo.imageLinks.thumbnail} alt="book cover" />
+              <div>{book.volumeInfo.title}</div>
+              <div>Author(s): {book.volumeInfo.authors}</div>
+              {(book.saleInfo.saleability === 'NOT_FOR_SALE')
+               ? <div>Price: Not For Sale</div>
+               : <div>Price: ${book.saleInfo.listPrice.amount}</div>
+              }
+              <div>{book.volumeInfo.description}</div>
             </li>
           ))}
         </ul>
 
-        {/*
+      </div>
+    );
+  }
+
+}
+
+export default App;
+
+//------------------------------------------
+        /*
         <form onSubmit={this.handleSubmit}>
           <label id="searchInput">
             Name:
@@ -131,11 +151,4 @@ class App extends Component {
             </select>
           </label>
         </form>
-        */}
-
-      </div>
-    );
-  }
-}
-
-export default App;
+        */
