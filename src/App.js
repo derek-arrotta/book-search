@@ -11,6 +11,7 @@ class App extends Component {
       searchInput: '',
       printType: 'all',
       bookType: 'no filter',
+      listItems: [],
     };
     // bind update functions to states?
     this.searchChange = this.searchChange.bind(this);
@@ -28,13 +29,25 @@ class App extends Component {
     if (this.state.bookType === "no filter") {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&key=${APIkey}`)
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => {
+          console.log(data);
+          this.displayData(data);
+        });
     }
     else {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&filter=${this.state.bookType}&key=${APIkey}`)
         .then(res => res.json())
-        .then(data => console.log(data));
+        .then(data => {
+          console.log(data);
+          this.displayData(data);
+        });
     }
+  }
+
+  displayData(data) {
+    console.log('display data was called');
+    console.log(data);
+    console.log(data.items[0].volumeInfo);
   }
 
   // if search input, print type, or book type is changed, update the state
@@ -72,8 +85,9 @@ class App extends Component {
           handleSubmit={event => this.handleSubmit(event)}
         />
 
-
-
+        <div>
+          put list of books here
+        </div>
 
         {/*
         <form onSubmit={this.handleSubmit}>
