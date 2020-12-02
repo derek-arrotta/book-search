@@ -18,6 +18,7 @@ class App extends Component {
     this.printTypeChange = this.printTypeChange.bind(this);
     this.bookTypeChange = this.bookTypeChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.updateDataState = this.updateDataState.bind(this);
   }
 
   // fetches from google books api
@@ -29,25 +30,25 @@ class App extends Component {
     if (this.state.bookType === "no filter") {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&key=${APIkey}`)
         .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          this.displayData(data);
+        .then(listItems => {
+          console.log(listItems);
+          this.updateDataState(listItems);
         });
     }
     else {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&filter=${this.state.bookType}&key=${APIkey}`)
         .then(res => res.json())
-        .then(data => {
-          console.log(data);
-          this.displayData(data);
+        .then(listItems => {
+          console.log(listItems);
+          this.updateDataState(listItems);
         });
     }
   }
 
-  displayData(data) {
-    console.log('display data was called');
-    console.log(data);
-    console.log(data.items[0].volumeInfo);
+  updateDataState(listItems) {
+   console.log('display data was called');
+   this.setState({listItems});
+    console.log(this.state.listItems);
   }
 
   // if search input, print type, or book type is changed, update the state
@@ -85,9 +86,13 @@ class App extends Component {
           handleSubmit={event => this.handleSubmit(event)}
         />
 
-        <div>
-          put list of books here
-        </div>
+        <ul >
+          {this.state.listItems.map(data => (
+            <li>
+              {data.items.volumeInfo.title}
+            </li>
+          ))}
+        </ul>
 
         {/*
         <form onSubmit={this.handleSubmit}>
