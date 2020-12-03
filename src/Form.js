@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import SearchForm from "./SearchForm"
+import SearchForm from "./SearchForm";
+import PrintTypeForm from "./PrintTypeForm";
 
 class Form extends Component {
   render() {
@@ -7,20 +8,13 @@ class Form extends Component {
       <form onSubmit={this.props.handleSubmit}>
         <SearchForm
           value={this.props.searchInput}
-          searchChange={searchInput => this.props.searchChange(searchInput)}
+          searchChange={(searchInput) => this.props.searchChange(searchInput)}
         />
-        <label>
-          Print Type:
-          <select
-            id="printType"
-            value={this.props.printType}
-            onChange={(e) => this.props.printTypeChange(e.target.value)}
-          >
-            <option value="all">all</option>
-            <option value="books">books</option>
-            <option value="magazines">magazines</option>
-          </select>
-        </label>
+        <PrintTypeForm
+          value={this.props.printType}
+          printTypeChange={printType => this.props.printTypeChange(printType)}
+        />
+        
         <label>
           Book Type:
           <select
@@ -43,11 +37,9 @@ class Form extends Component {
 
 export default Form;
 
-
 //------------------------------------------------------------------------------
 // THIS CODE BELOW WAS IN RENDER/RETURN BEFORE BEING MOVED TO ITS OWN COMPONENT
 //------------------------------------------------------------------------------
-
 
 /*
     SEARCH FORM
@@ -59,5 +51,19 @@ export default Form;
     onChange={(e) => this.props.searchChange(e.target.value)}
   />
   <input type="submit" value="Submit" />
+</label>
+
+    PRINT TYPE
+<label>
+  Print Type:
+  <select
+    id="printType"
+    value={this.props.printType}
+    onChange={(e) => this.props.printTypeChange(e.target.value)}
+  >
+    <option value="all">all</option>
+    <option value="books">books</option>
+    <option value="magazines">magazines</option>
+  </select>
 </label>
 */
