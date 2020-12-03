@@ -16,6 +16,7 @@ class App extends Component {
       printType: 'all',
       bookType: 'no filter',
       books: [],
+      booksTotal: 1,
     };
     // bind update functions to states?
     this.searchChange = this.searchChange.bind(this);
@@ -36,7 +37,7 @@ class App extends Component {
         .then(res => res.json())
         .then(response => {
           console.log(response);
-          this.updateDataState(response.items);
+          this.updateDataState(response.items, response.totalItems);
         });
     }
     else {
@@ -44,15 +45,16 @@ class App extends Component {
         .then(res => res.json())
         .then(response => {
           console.log(response);
-          this.updateDataState(response.items);
+          this.updateDataState(response.items, response.totalItems);
         });
     }
   }
 
   // update state with new response data after submit is pressed
-  updateDataState(responseItems) {
+  updateDataState(responseItems, responseTotalItems) {
    console.log('display data was called');
    this.setState({books: responseItems});
+   this.setState({booksTotal: responseTotalItems});
    console.log(this.state.books);
   }
 
@@ -97,6 +99,8 @@ class App extends Component {
         {/* LIST OF BOOKS */}
         <BookList
           books={this.state.books}
+          booksTotal={this.state.booksTotal}
+          bookType={this.state.bookType}
         />
 
       </div>
@@ -109,9 +113,9 @@ export default App;
 
 
 
-//-----------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 // THIS CODE BELOW WAS IN RENDER/RETURN BEFORE BEING MOVED TO ITS OWN COMPONENT
-//------------------------------------------------------------------------
+//-----------------------------------------------------------------------------
 
 /*
     FORM
