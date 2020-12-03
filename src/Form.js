@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import PrintTypeForm from "./PrintTypeForm";
+import BookTypeForm from "./BookTypeForm";
 
 class Form extends Component {
   render() {
@@ -14,22 +15,10 @@ class Form extends Component {
           value={this.props.printType}
           printTypeChange={printType => this.props.printTypeChange(printType)}
         />
-        
-        <label>
-          Book Type:
-          <select
-            id="bookType"
-            value={this.props.bookType}
-            onChange={(e) => this.props.bookTypeChange(e.target.value)}
-          >
-            <option value="no filter">no filter</option>
-            <option value="partial">parts of text are viewable</option>
-            <option value="full">all of text is viewable</option>
-            <option value="free-ebooks">free ebooks</option>
-            <option value="paid-ebooks">paid ebooks</option>
-            <option value="ebooks">paid or free ebooks</option>
-          </select>
-        </label>
+        <BookTypeForm
+          value={this.props.bookType}
+          bookTypeChange={bookType => this.props.bookTypeChange(bookType)}
+        />
       </form>
     );
   }
@@ -42,6 +31,7 @@ export default Form;
 //------------------------------------------------------------------------------
 
 /*
+
     SEARCH FORM
 <label id="searchInput">
   Name:
@@ -52,6 +42,7 @@ export default Form;
   />
   <input type="submit" value="Submit" />
 </label>
+
 
     PRINT TYPE
 <label>
@@ -66,4 +57,23 @@ export default Form;
     <option value="magazines">magazines</option>
   </select>
 </label>
+
+
+    BOOK TYPE
+<label>
+  Book Type:
+  <select
+    id="bookType"
+    value={this.props.bookType}
+    onChange={(e) => this.props.bookTypeChange(e.target.value)}
+  >
+    <option value="no filter">no filter</option>
+    <option value="partial">parts of text are viewable</option>
+    <option value="full">all of text is viewable</option>
+    <option value="free-ebooks">free ebooks</option>
+    <option value="paid-ebooks">paid ebooks</option>
+    <option value="ebooks">paid or free ebooks</option>
+  </select>
+</label>
+
 */
