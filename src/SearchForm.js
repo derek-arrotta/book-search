@@ -1,10 +1,11 @@
 import React, { Component } from "react";
+import "./SearchForm.css"
 
 class SearchForm extends Component {
   render() {
     return (
       <label id="searchInput">
-        Name:
+        Search:
         <input
           type="text"
           value={this.props.searchInput}

@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import "./BookTypeForm.css"
 
 class BookTypeForm extends Component {
   render() {
     return (
-      <label>
+      <label id="bookTypeForm">
         Book Type:
         <select
           id="bookType"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import SearchForm from "./SearchForm";
 import PrintTypeForm from "./PrintTypeForm";
 import BookTypeForm from "./BookTypeForm";
+import "./Form.css"
 
 class Form extends Component {
   render() {
@@ -11,14 +12,16 @@ class Form extends Component {
           value={this.props.searchInput}
           searchChange={(searchInput) => this.props.searchChange(searchInput)}
         />
-        <PrintTypeForm
-          value={this.props.printType}
-          printTypeChange={printType => this.props.printTypeChange(printType)}
-        />
-        <BookTypeForm
-          value={this.props.bookType}
-          bookTypeChange={bookType => this.props.bookTypeChange(bookType)}
-        />
+        <div id="filter-forms">
+          <PrintTypeForm
+            value={this.props.printType}
+            printTypeChange={printType => this.props.printTypeChange(printType)}
+          />
+          <BookTypeForm
+            value={this.props.bookType}
+            bookTypeChange={bookType => this.props.bookTypeChange(bookType)}
+          />
+        </div>
       </form>
     );
   }

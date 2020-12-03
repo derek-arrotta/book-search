@@ -1,0 +1,11 @@
+form {
+  background-color: grey;
+  padding-top: 25px;
+  padding-bottom: 25px;
+}
+
+#filter-forms {
+  display: flex;
+  justify-content: center;
+  padding-top: 5px;
+}

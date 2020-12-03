@@ -1,0 +1,41 @@
+
+li {
+  list-style-type: none;
+  padding-left: 125px;
+  padding-right: 125px;
+  padding-top: 30px;
+}
+
+#title {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  padding-bottom: 30px;
+}
+
+#row  {
+  display: flex;
+  flex-direction: row;
+}
+
+#column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+img {
+  width: 200px;
+}
+
+#description {
+  padding-left: 50px;
+}
+
+.book-info {
+  padding-left: 50px;
+}
+
+#description {
+  padding-top: 30px;
+}
