@@ -1,18 +1,14 @@
 import React, { Component } from "react";
+import SearchForm from "./SearchForm"
 
 class Form extends Component {
   render() {
     return (
       <form onSubmit={this.props.handleSubmit}>
-        <label id="searchInput">
-          Name:
-          <input
-            type="text"
-            value={this.props.searchInput}
-            onChange={(e) => this.props.searchChange(e.target.value)}
-          />
-        </label>
-        <input type="submit" value="Submit" />
+        <SearchForm
+          value={this.props.searchInput}
+          searchChange={searchInput => this.props.searchChange(searchInput)}
+        />
         <label>
           Print Type:
           <select
@@ -46,3 +42,22 @@ class Form extends Component {
 }
 
 export default Form;
+
+
+//------------------------------------------------------------------------------
+// THIS CODE BELOW WAS IN RENDER/RETURN BEFORE BEING MOVED TO ITS OWN COMPONENT
+//------------------------------------------------------------------------------
+
+
+/*
+    SEARCH FORM
+<label id="searchInput">
+  Name:
+  <input
+    type="text"
+    value={this.props.searchInput}
+    onChange={(e) => this.props.searchChange(e.target.value)}
+  />
+  <input type="submit" value="Submit" />
+</label>
+*/
