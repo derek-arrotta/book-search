@@ -1,7 +1,11 @@
+// IMPORT
 import React, { Component } from "react";
-import Form from './Form';
 import "./App.css";
+import Form from './Form';
+import BookList from './BookList';
 
+
+// APP COMPONENT
 class App extends Component {
   
   // define props
@@ -26,7 +30,7 @@ class App extends Component {
     const googleBookURL = `https://www.googleapis.com/books/v1/volumes`;
     const APIkey = 'AIzaSyBbwfVgB3Tm0styebgMNI-I_Zw7WjRqDUo';
     
-    // if no filter is selected, run fetch without filter parameter
+    // if 'no filter' is selected, run fetch without filter parameter
     if (this.state.bookType === "no filter") {
       fetch(`${googleBookURL}?q=${this.state.searchInput}&printType=${this.state.printType}&key=${APIkey}`)
         .then(res => res.json())
@@ -45,7 +49,7 @@ class App extends Component {
     }
   }
 
-  // update state with new response data when after submit is pressed
+  // update state with new response data after submit is pressed
   updateDataState(responseItems) {
    console.log('display data was called');
    this.setState({books: responseItems});
@@ -72,7 +76,7 @@ class App extends Component {
     this.fetchBooks();
   }
 
-  // render of input forms
+  // render APP (header, form, list of books)
   render() {
     return (
       <div className="App">
@@ -91,21 +95,9 @@ class App extends Component {
         />
 
         {/* LIST OF BOOKS */}
-        <ul >
-          {this.state.books.map((book, index) => (
-            <li key={index}>
-              <img src={book.volumeInfo.imageLinks.thumbnail} alt="book cover" />
-              <div>{book.volumeInfo.title}</div>
-              <div>Author(s): {book.volumeInfo.authors}</div>
-              {(book.saleInfo.saleability === 'NOT_FOR_SALE')
-              ? <div>Price: Not For Sale</div>
-              : <div>Price: ${book.saleInfo.listPrice.amount}</div>
-              }
-              <div>{book.volumeInfo.description}</div>
-              <hr />
-            </li>
-          ))}
-        </ul>
+        <BookList
+          books={this.state.books}
+        />
 
       </div>
     );
@@ -118,11 +110,11 @@ export default App;
 
 
 //-----------------------------------------------------------------------
-// THIS CODE WAS IN RENDER/RETURN BEFORE BEING MOVED TO ITS OWN COMPONENT
+// THIS CODE BELOW WAS IN RENDER/RETURN BEFORE BEING MOVED TO ITS OWN COMPONENT
 //------------------------------------------------------------------------
 
 /*
-// FORM
+    FORM
 <form onSubmit={this.handleSubmit}>
   <label id="searchInput">
     Name:
@@ -159,4 +151,23 @@ export default App;
     </select>
   </label>
 </form>
+*/
+
+/*
+    LIST
+<ul >
+  {this.state.books.map((book, index) => (
+    <li key={index}>
+      <img src={book.volumeInfo.imageLinks.thumbnail} alt="book cover" />
+      <div>{book.volumeInfo.title}</div>
+      <div>Author(s): {book.volumeInfo.authors}</div>
+      {(book.saleInfo.saleability === 'NOT_FOR_SALE')
+      ? <div>Price: Not For Sale</div>
+      : <div>Price: ${book.saleInfo.listPrice.amount}</div>
+      }
+      <div>{book.volumeInfo.description}</div>
+      <hr />
+    </li>
+  ))}
+</ul>
 */
