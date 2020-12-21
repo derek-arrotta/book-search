@@ -1,2 +1,13 @@
-# book-search
- thinkful book search app with google api
+# Book Search App
+
+Search for books on googles API. Use print type and book type filters to hone in on more tailored searches. 
+
+## Technology
+
+Javascript, HTML, CSS, Google Books API
+
+## Screenshots
+
+![screen shot](/screenshot.png)
+
+
