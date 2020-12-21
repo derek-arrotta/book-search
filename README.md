@@ -4,7 +4,7 @@ Search for books on googles API. Use print type and book type filters to hone in
 
 ## Technology
 
-Javascript, HTML, CSS, Google Books API
+React, Javascript, HTML, CSS, Google Books API
 
 ## Screenshots
 
